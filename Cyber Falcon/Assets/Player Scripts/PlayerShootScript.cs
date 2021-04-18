@@ -32,24 +32,14 @@ public class PlayerShootScript : MonoBehaviour
     void FireBullet()
     {
         canShoot = false;
-        /*Vector3 bulletLoc = this.transform.position + this.transform.forward * 2.0f;
-        GameObject bullet = Instantiate(bulletPrefab, bulletLoc, this.transform.rotation);
-        bullet.GetComponent<PlayerBulletScript>().SetVelocity(this.gameObject, reticle, bulletSpeed);*/
-        /* Ray ray = Camera.main.ScreenPointToRay(reticle.transform.position);
-         RaycastHit hit = default;
-         if(Physics.Raycast(ray, out hit, Mathf.Infinity))
-         {
-             if(hit.transform.gameObject.tag == "Ground")
-             {
-                 Debug.Log("Hit ground");
-             }
-         }*/
         explosion.Play();
         Vector3 forward = this.transform.TransformDirection(Vector3.forward);
         RaycastHit hit;
         int mask = ~((1 << 7) | (1 << 5) | (1 << 8));
         Ray ray = Camera.main.ScreenPointToRay(reticle.transform.position);
-        if (Physics.Raycast(ray, out hit, Mathf.Infinity, mask))
+        ray = Camera.main.ViewportPointToRay(reticle.transform.position);
+       // if(Physics.Raycast(reticle.transform.position, reticle.transform.TransformDirection(Vector3.forward), out hit, Mathf.Infinity, mask))
+        if (Physics.Raycast(ray, out hit, 1000.0f, mask))
         {
             Debug.DrawRay(ray.origin, ray.direction * 1000f);
             Debug.Log(hit.point);

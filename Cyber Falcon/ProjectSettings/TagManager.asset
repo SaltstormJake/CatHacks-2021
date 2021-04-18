@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Target Range
   - Ground
+  - UFO
   layers:
   - Default
   - TransparentFX

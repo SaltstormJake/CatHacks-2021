@@ -6,7 +6,7 @@ public class PlayerBulletScript : MonoBehaviour
 {
     float speed = 0;
     [SerializeField] Vector3 direction = default;
-
+    Vector3 target = default;
     // Start is called before the first frame update
     void Start()
     {
@@ -21,13 +21,10 @@ public class PlayerBulletScript : MonoBehaviour
 
     void FixedUpdate()
     {
-        if(this.transform.position.z > 20.0f)
-        {
-            float magnitude = direction.magnitude;
-            direction = new Vector3(0, 0, magnitude);
-            this.transform.eulerAngles = new Vector3(0, 0, 0);
-        }
-        this.transform.Translate(direction * speed);
+        //Vector3 direction = (target - this.transform.position).normalized;
+        this.transform.position += (direction * speed);
+        if (this.transform.position.z < -10)
+            Destroy(this.gameObject);
     }
     /*
     private void OnTriggerEnter(Collider other)
@@ -40,10 +37,10 @@ public class PlayerBulletScript : MonoBehaviour
         }
     }*/
 
-    public void SetVelocity(GameObject origin, GameObject target, float _speed)
+    public void SetVelocity(Vector3 _target, float _speed)
     {
-        Debug.Log(Camera.main.ViewportToWorldPoint(target.transform.position));
-        direction = Camera.main.ViewportToWorldPoint(target.transform.position) - origin.transform.forward;
         speed = _speed;
+        _target = target;
+        direction = (target - this.transform.position).normalized;
     }
 }

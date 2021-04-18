@@ -26,6 +26,7 @@ public class ReticlePositionScript : MonoBehaviour
             Vector3 pos = hit.point;
             pos.z -= 5.0f;
             this.transform.position = pos;
+            //this.transform.position = Camera.main.WorldToScreenPoint(pos);
         }
        // Vector3 aimPoint = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10.0f));
        // this.transform.position = aimPoint;
