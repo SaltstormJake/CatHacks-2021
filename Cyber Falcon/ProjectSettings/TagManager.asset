@@ -7,6 +7,7 @@ TagManager:
   - Target Range
   - Ground
   - UFO
+  - Bullet
   layers:
   - Default
   - TransparentFX
